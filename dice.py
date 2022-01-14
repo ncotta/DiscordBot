@@ -10,11 +10,19 @@ diceTypes = ["d100", "d20", "d12", "d10", "d8", "d6", "d4", "d2"]
 
 
 def roll(diceType):
+    critHit = False
+    critMiss = False
+
     if diceType.lower().strip() not in diceTypes:
         return None
 
     else:
         result = random.randint(1, int(diceType[1:]))
+
+    if int(result) == 1:
+        critMiss = True
+    elif int(result) == int(diceType[1:]):
+        critHit = True
 
     return result  # f"You rolled a {diceType} and got a {result}!"
 
