@@ -13,6 +13,9 @@ from dotenv import load_dotenv
 
 client = discord.Client()
 
+insultsList = ["is the bloody son of a motherless kobold!", "likes to eat cheese without crackers",
+               "sleeps on their stomach", "is a big baby", "enjoys eating soggy doritos", "collects orc toenails",
+               "doesn't know how to tap dance", "couldn't beat a level 1 slime"]
 
 @client.event
 async def on_ready():
@@ -45,6 +48,13 @@ async def on_message(message):
         await message.channel.send(f"Choosing a good name for you based on {random.randint(5000, 200000)} data points...")
         time.sleep(0.5)
         await message.channel.send(generator("human"))
+
+    elif message.content.startswith("$insult"):
+        msgstr = message.content.split()
+        try:
+            await message.channel.send(f"{msgstr[1]} {random.choice(insultsList)}")
+        except IndexError:
+            await message.channel.send(f"<@{message.author.id}> {random.choice(insultsList)}")
 
     elif message.content.startswith("$"):
         await message.channel.send("Command not recognized...")
