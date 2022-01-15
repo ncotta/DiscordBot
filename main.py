@@ -71,6 +71,10 @@ async def on_message(message):
 
         await message.channel.send(f"Sorry {msgstr[i]} :frowning:")
 
+    elif message.content.startswith("$back"):
+        await message.add_reaction("👍")
+        await message.add_reaction("💯")
+
     elif message.content.startswith("$goodbye"):
         await message.add_reaction("😴")
         await message.add_reaction("👋")
