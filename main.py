@@ -51,10 +51,11 @@ async def on_message(message):
         await message.channel.send(multiroll(msgList[1], int(msgList[2])))
 
     elif message.content.startswith("$name"):
+        msgstr = message.content.split()
         await message.channel.send(
-            f"Choosing a good name for you based on {random.randint(5000, 200000)} data points...")
+            f"Choosing a good name for you based on {random.randint(15, 1000)} data points...")
         time.sleep(0.5)
-        await message.channel.send(generator("human"))
+        await message.channel.send(f"Your new name is...\n{generator(msgstr[1])}")
 
     elif message.content.startswith("$insult"):
         msgstr = message.content.split()

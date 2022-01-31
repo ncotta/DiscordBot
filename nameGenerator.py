@@ -9,7 +9,7 @@ import random
 
 def generator(race):
 
-    fileFirst = f"names/{race}_first"
+    fileFirst = f"names/{race}_first.txt"
     with open(fileFirst, "r") as f:
         firstnames = [x.strip() for x in f.readlines()]
     f.close()
@@ -18,7 +18,7 @@ def generator(race):
 
     # These races only have the one name
     if not ((race == "aarakocra") or (race == "genasi") or (race == "halfOrc") or (race == "orc") or (race == "tiefling")):
-        fileLast = f"names/{race}_last"
+        fileLast = f"names/{race}_last.txt"
         with open(fileLast, "r") as f:
             lastnames = [x.strip() for x in f.readlines()]
         f.close()
@@ -27,7 +27,7 @@ def generator(race):
 
     # Goliaths have three names
     if race == "goliath":
-        with open("names/goliath_last_last", "r") as f:
+        with open("names/goliath_last_last.txt", "r") as f:
             lastlastnames = [x.strip() for x in f.readlines()]
         f.close()
 
