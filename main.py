@@ -36,7 +36,11 @@ async def on_message(message):
         await message.channel.send("Here is a list of the following commands:\n"
                                    "``about``\t\t\t get information about me!\n"
                                    "``roll <dice> <nun>``\t\t\t roll some dice!\n"
-                                   "``name <race>``\t\t\t generate a player name! ")
+                                   "``name <race>``\t\t\t generate a player name!\n"
+                                   "``insult <user>``\t\t\t insults yourself or another!\n"
+                                   "``apologize <user>``\t\t\t says sorry to someone else\n"
+                                   "``back me up``\t\t\t provides moral support\n"
+                                   "``goodbye``\t\t\t say bye to Beholder :(")
     elif message.content.startswith("$about"):
         await message.channel.send("I am a D&D bot created by schnibs ;)")
 
@@ -74,6 +78,7 @@ async def on_message(message):
     elif message.content.startswith("$back"):
         await message.add_reaction("👍")
         await message.add_reaction("💯")
+        await message.add_reaction("😤")
 
     elif message.content.startswith("$goodbye"):
         await message.add_reaction("😴")
