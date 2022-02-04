@@ -17,9 +17,21 @@ insultsList = ["is the bloody son of a motherless kobold!", "likes to eat cheese
                "sleeps on their stomach", "is a big baby", "enjoys eating soggy doritos", "collects orc toenails",
                "doesn't know how to tap dance", "couldn't beat a level 1 slime"]
 
+commandsList = [f"Here is a list of the following commands:\n",
+                f"``about``               get information about me!\n",
+                f"``roll <dice> <nun>``   roll some dice!\n",
+                f"``name <race>``         generate a player name!\n",
+                f"``insult <user>``       insults yourself or another!\n",
+                f"``apologize <user>``    says sorry to someone else\n",
+                f"``back me up``          provides moral support\n",
+                f"``goodbye``             say bye to Beholder :("]
+
 
 @client.event
 async def on_ready():
+    """
+    Description: This tells the bot what to do when it turns on
+    """
     print(f"We have logged in as {client.user}")
     await client.change_presence(
         activity=discord.Activity(name='Jeepers Creepers', type=discord.ActivityType.listening))
@@ -27,20 +39,22 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    """
+    Description: On a message with the prefix of $ (a command), Beholder will parse
+    the message and do something accordingly
+    :param message: String. Any message a user sends in the discord server Beholder is a part of
+    """
     if message.author == client.user:
         return
 
     if message.content.startswith("$help"):
         await message.channel.send("My prefix is ``$``\n")
-        time.sleep(0.5)
-        await message.channel.send("Here is a list of the following commands:\n"
-                                   "``about``\t\t\t get information about me!\n"
-                                   "``roll <dice> <nun>``\t\t\t roll some dice!\n"
-                                   "``name <race>``\t\t\t generate a player name!\n"
-                                   "``insult <user>``\t\t\t insults yourself or another!\n"
-                                   "``apologize <user>``\t\t\t says sorry to someone else\n"
-                                   "``back me up``\t\t\t provides moral support\n"
-                                   "``goodbye``\t\t\t say bye to Beholder :(")
+        time.sleep(1)
+
+        for command in commandsList:
+            await message.channel.send(command)
+            time.sleep(0.5)
+
     elif message.content.startswith("$about"):
         await message.channel.send("I am a D&D bot created by schnibs ;)")
 
@@ -87,7 +101,8 @@ async def on_message(message):
         await client.close()
 
     elif message.content.startswith("$"):
-        await message.channel.send("Command not recognized...")
+        await message.channel.send("Command not recognized..."
+                                   "Type ``$help`` for commands!")
 
 
 if __name__ == '__main__':
